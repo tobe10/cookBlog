@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> Recipe</li>
+    </ol>
+</nav>
+
+<% if (locals.Recipe) { %>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4 m-4">
+        <% Recipe.forEach(recipe=> { %>
+            <a href="/recipe/<%-recipe.id %>" class="col text-center  category_link">
+                <div class="category_img shadow">
+                    <img src="/uploads/<%-recipe.image %>" alt="<%-recipe.name %>" loading="lazy" class=" h-50 px-4">
+                </div>
+                <div class="pt-"><%-recipe.name %> </div>
+            </a>
+            <% }) %>
+                <% } %>

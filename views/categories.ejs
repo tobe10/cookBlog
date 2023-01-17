@@ -1,0 +1,22 @@
+<h1>Categories</h1>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> Explore Categories</li>
+    </ol>
+</nav>
+
+<% if (locals.categories) { %>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+        <% categories.forEach(category=> { %>
+
+
+            <a href="/categories/<%-category.name %>" class="col text-center  category_link">
+                <div class="category_img shadow">
+                    <img src="img/<%-category.image %>" alt="<%-category.name %>" loading="lazy" class=" h-100">
+                </div>
+                <div class="pt-"><%-category.name %> </div>
+            </a>
+            <% }) %>
+                <% } %>

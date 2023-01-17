@@ -1,0 +1,15 @@
+<h1>search</h1>
+
+<div class="row row-col-3 row-cols-lg-5  g-2 g-lg-3">
+    <% if (Recipe) { %>
+        <% Recipe.forEach((recipe,index)=> { %>
+            <a href="/recipe/<%=recipe._id  %> " class="col text-center category_link">
+                <div class="category_img category_img_lg shadow">
+                    <img src="uploads/<%=recipe.image %> " alt="<%=recipe.name  %>" loading="lazy">
+                </div>
+                <h4>
+                    <%=recipe.name %>
+                </h4>
+            </a>
+            <% }) %>
+                <% } %>

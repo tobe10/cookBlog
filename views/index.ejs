@@ -1,0 +1,146 @@
+<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4 ">
+    <div class="col-12 col-lg-6">
+        <img src="/img/hero.jpg" width="607" class="d-block mx-lg-auto " loading="lazy" alt="Cooking Blog">
+    </div>
+    <div class="col-12 col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Huge selection of delicious recipe ideas</h1>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quisquam dolorem architecto
+            ut, laboriosam distinctio vero facere suscipit, sint unde fugiat, est adipisci. Ea in cupiditate
+            necessitatibus fugit. Suscipit, blanditiis!
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
+            <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Show Random</a>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Start -->
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+    <% if (locals.categories) { %>
+        <% categories.forEach(category=> { %>
+
+            <a href="/categories/<%-category.name %>" class="col text-center  category_link">
+                <div class="category_img shadow">
+                    <img src="img/<%-category.image %>" alt="<%-category.name %>" loading="lazy" class=" h-100">
+                </div>
+                <div class="pt-"><%-category.name %> </div>
+            </a>
+            <% }) %>
+                <% } %>
+
+</div>
+
+<!-- Latest start -->
+
+<section class="pb-4 pt-4 row-col-3">
+
+    <div class="align-items-center d-flex mb-2">
+        <h2>Latest recipes</h2>
+        <a href="/explore-latest" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-col-3 row-cols-lg-5  g-2 g-lg-3">
+        <% if (food) { %>
+            <% food.latest.forEach((recipe,index)=> { %>
+                <a href="/recipe/<%=recipe._id  %> " class="col text-center category_link">
+                    <div class="category_img category_img_lg shadow">
+                        <img src="uploads/<%=recipe.image %> " alt="<%=recipe.name  %>" loading="lazy">
+                    </div>
+                    <h4>
+                        <%=recipe.name %>
+                    </h4>
+                </a>
+                <% }) %>
+                    <% } %>
+
+
+
+
+</section>
+<!-- Latest end -->
+<!-- thai -->
+<section class="pb-4 pt-4 row-col-3">
+
+    <div class="align-items-center d-flex mb-2">
+        <h2>Thai recipes</h2>
+        <a href="/explore-latest" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-col-3 row-cols-lg-5  g-2 g-lg-3">
+        <% if (food) { %>
+            <% food.thai.forEach((recipe,index)=> { %>
+                <a href="/recipe/<%=recipe._id  %> " class="col text-center category_link">
+                    <div class="category_img category_img_lg shadow">
+                        <img src="uploads/<%=recipe.image %> " alt="<%=recipe.name  %>" loading="lazy">
+                    </div>
+                    <h4>
+                        <%=recipe.name %>
+                    </h4>
+                </a>
+                <% }) %>
+                    <% } %>
+
+</section>
+<!-- thai ends here -->
+<!-- american starts -->
+<section class="pb-4 pt-4 row-col-3">
+
+    <div class="align-items-center d-flex mb-2">
+        <h2>American recipes</h2>
+        <a href="/explore-latest" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-col-3 row-cols-lg-5  g-2 g-lg-3">
+        <% if (food) { %>
+            <% food.american.forEach((recipe,index)=> { %>
+                <a href="/recipe/<%=recipe._id  %> " class="col text-center category_link">
+                    <div class="category_img category_img_lg shadow">
+                        <img src="uploads/<%=recipe.image %> " alt="<%=recipe.name  %>" loading="lazy">
+                    </div>
+                    <h4>
+                        <%=recipe.name %>
+                    </h4>
+                </a>
+                <% }) %>
+                    <% } %>
+
+</section>
+<!-- american ends here -->
+<!-- chinese starts here -->
+<section class="pb-4 pt-4 row-col-3">
+
+    <div class="align-items-center d-flex mb-2">
+        <h2>Chinese recipes</h2>
+        <a href="/explore-latest" class="ms-auto">View More</a>
+    </div>
+
+    <div class="row row-col-3 row-cols-lg-5  g-2 g-lg-3">
+        <% if (food) { %>
+            <% food.chinese.forEach((recipe,index)=> { %>
+                <a href="/recipe/<%=recipe._id  %> " class="col text-center category_link">
+                    <div class="category_img category_img_lg shadow">
+                        <img src="uploads/<%=recipe.image %> " alt="<%=recipe.name  %>" loading="lazy">
+                    </div>
+                    <h4>
+                        <%=recipe.name %>
+                    </h4>
+                </a>
+                <% }) %>
+                    <% } %>
+
+
+</section>
+
+<!-- chinese ends here -->
+<!-- Submit start -->
+<section class="px-4 py-5 text-center col-lg-6 mx-auto">
+    <img src="img/submit-image.jpg" class="d-block mx-auto mb-4 img-fluid category_link"
+        alt="Publish your images for free today" loading="lazy">
+    <p class="lead mb-4">Publish your recipe for free Today</p>
+    <div class="d-grid g-2 d-sm-flex justify-content-sm-center">
+        <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
+    </div>
+    </div>
+</section>
+<!-- Submit end -->
