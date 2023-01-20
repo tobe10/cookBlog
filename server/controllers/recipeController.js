@@ -1,5 +1,6 @@
 const categorySchema = require('../models/Category');
 const recipe = require('../models/recipe');
+const path = require('path');
 
 const homePage = async (req, res) => {
     try {
@@ -75,6 +76,115 @@ const searchCategory = async (req, res) => {
         const Recipe = await recipe.find({ "category": category })
         res.render('categoryById', { title: 'Cooking Blog ' + category, Recipe });
     } catch (err) {
+        res.status(500).send({ message: err.message || "error occured" })
+    }
+
+}
+const submitRecipe = async (req, res) => {
+    try {
+        const succeedInfo = req.flash('succeedInfo')
+        const infoError = req.flash('infoError')
+        console.log(succeedInfo)
+        const message = { succeedInfo, infoError }
+        res.render('submit-recipe', { title: 'Cooking Blog Sbmit a Recipe ', message });
+    } catch (err) {
+
+        res.status(500).send({ message: err.message || "error occured" })
+    }
+
+}
+const submitRecipeOnPost = async (req, res) => {
+    try {
+        if (!req.files || Object.keys(req.files).length === 0) {
+            console.log('No Files Uploaded')
+        }
+        const uploadedImage = req.files.image;
+        const newName = Date.now() + uploadedImage.name;
+        const imagePath = path.join('public', 'uploads', newName)
+        uploadedImage.mv(imagePath, (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        const { name, description,
+            email,
+            ingredients,
+            category } = req.body;
+        const newRecipe = new recipe({
+            name,
+            description,
+            email,
+            ingredients,
+            category,
+            image: newName
+        })
+        await newRecipe.save().then(() => {
+            req.flash('succeedInfo', 'New Recipe Successfully Created')
+        });
+        res.redirect('/submit-recipe');
+    } catch (err) {
+        req.flash('infoError', err)
+        res.status(500).send({ message: err.message || "error occured" })
+    }
+
+}
+const updateRecipe = async (req, res) => {
+    try {
+        const toUpdate = await recipe.findById(req.params.id);
+        if (!toUpdate) {
+            console.log('File no exist')
+        }
+        res.render('update-recipe', { title: 'Cooking Blog Update a Recipe ', toUpdate });
+
+    }
+
+
+    catch (err) {
+
+        req.flash('infoError', err)
+        res.status(500).send({ message: err.message || "error occured" })
+    }
+
+}
+const updateRecipeOnPost = async (req, res) => {
+    try {
+        const toUpdate = await recipe.findById(req.params.id)
+        if (!toUpdate) {
+            console.log('File no exist')
+        }
+        const uploadedImage = req.files.image;
+        const newName = Date.now() + uploadedImage.name;
+        const imagePath = path.join('public', 'uploads', newName)
+        uploadedImage.mv(imagePath, (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        const { name, description,
+            email,
+            ingredients,
+            category } = req.body;
+        const newRecipe = new recipe({
+            name,
+            description,
+            email,
+            ingredients,
+            category,
+            image: newName
+        })
+        await recipe.findOneAndReplace({ name: toUpdate.name, category: toUpdate.category },
+            {
+                name,
+                description,
+                email,
+                ingredients,
+                category,
+                image: newName
+            });
+        req.flash('succeedInfo', ' Recipe Successfully Updated')
+        res.redirect('/submit-recipe');
+    } catch (err) {
+        req.flash('infoError', err)
         res.status(500).send({ message: err.message || "error occured" })
     }
 
@@ -355,5 +465,6 @@ try {
 //insert()
 module.exports = {
     homePage, exploreCategories, exploreRecipes, searchRecipe,
-    searchCategory, showRandom, exploreLatest
+    searchCategory, showRandom, submitRecipeOnPost, exploreLatest,
+    submitRecipe, updateRecipeOnPost, updateRecipe
 }
