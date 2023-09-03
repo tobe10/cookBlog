@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const connexion = () => {
     try {
-        mongoose.connect(process.env.MONGO_URI, console.log('connected!!!'))
+        mongoose.connect(process.env.MONGO_URI)
         const db = mongoose.connection;
         console.log('connecté pour la premiere fois')
     }
