@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobe10/cookBlog.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "tobe the best",
   "license": "ISC",
   "dependencies": {
     "connect-flash": "^0.1.1",
